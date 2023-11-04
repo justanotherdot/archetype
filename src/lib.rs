@@ -27,6 +27,9 @@ pub fn snap(key: &str, subject: String) {
     let path = {
         let mut dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         dir.push("snapshots");
+        if !dir.exists() {
+            std::fs::create_dir_all(&dir).ok();
+        }
         dir.push(&format!("{}.snap", key));
         dir
     };
