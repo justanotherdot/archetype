@@ -3,6 +3,7 @@ name = "archetype"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
+description = "Record all the briliance in your life."
 
 [dependencies]
 paste = "1.0.14"
