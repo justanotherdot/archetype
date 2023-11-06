@@ -1,9 +1,9 @@
 [package]
 name = "archetype"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
-description = "Record all the briliance in your life."
+description = "Lightweight golden testing library."
 
 [dependencies]
 paste = "1.0.14"

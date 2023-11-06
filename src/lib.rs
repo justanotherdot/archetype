@@ -8,6 +8,9 @@ use similar::{ChangeTag, TextDiff};
 use std::fs;
 use std::path::PathBuf;
 
+#[doc(hidden)]
+pub use paste::paste;
+
 /// Take a snapshot of a some UTF-8 encoded text under a file with the
 /// name `key`.
 ///
@@ -25,7 +28,7 @@ use std::path::PathBuf;
 /// ```
 pub fn snap(key: &str, subject: String) {
     let path = {
-        let mut dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+        let mut dir = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
         dir.push("snapshots");
         if !dir.exists() {
             std::fs::create_dir_all(&dir).ok();
@@ -109,10 +112,10 @@ pub fn snap_json<A: Serialize>(key: &str, subject: &A) {
 #[macro_export]
 macro_rules! snap_json_test {
     ($fixture:ident) => {
-        paste::paste! {
+        $crate::paste! {
             #[test]
             fn [<snapshot_$fixture>]() {
-                crate::snap_json(std::stringify!($fixture), &$fixture());
+                $crate::snap_json(std::stringify!($fixture), &$fixture());
             }
         }
     };
